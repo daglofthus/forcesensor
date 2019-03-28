@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find kuka_resources)/urdf/common_constants.xacro"/>
+  <xacro:include filename="$(find kuka_resources)/urdf/common_materials.xacro"/>
+
+  <xacro:macro name="forcesensor" params="prefix">
+    <link name="${prefix}force">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://forcesensor/meshes/visual/force.dae" />
+        </geometry>
+        <xacro:material_kuka_pedestal />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://forcesensor/meshes/collision/force.stl" />
+        </geometry>
+      </collision>
+    </link>
+    <link name="${prefix}connector">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://forcesensor/meshes/visual/connector.dae" />
+        </geometry>
+        <xacro:material_kuka_pedestal />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://forcesensor/meshes/collision/connector.stl" />
+        </geometry>
+      </collision>
+    </link>    
+    <link name="${prefix}electronic">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://forcesensor/meshes/visual/electronic.dae" />
+        </geometry>
+        <xacro:material_kuka_pedestal />
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://forcesensor/meshes/collision/electronic.stl" />
+        </geometry>
+      </collision>
+    </link>    
+    
+
+    <joint name="${prefix}force-connector" type="fixed">      
+      <parent link="${prefix}force"/>
+      <child link="${prefix}connector"/>
+      <origin xyz="0 0 0.05076" rpy="0 0 0"/>
+    </joint>  
+    <joint name="${prefix}connector-electronic" type="fixed">      
+      <parent link="${prefix}connector"/>
+      <child link="${prefix}electronic"/>
+      <origin xyz="0 0 0.01" rpy="0 0 0"/>
+    </joint>  
+  </xacro:macro>
+</robot>

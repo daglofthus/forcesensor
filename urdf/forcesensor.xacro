@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<robot name="forcesensor" xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:include filename="$(find forcesensor)/urdf/forcesensor_macro.xacro" />
+  <xacro:forcesensor prefix=""/>
+</robot>
